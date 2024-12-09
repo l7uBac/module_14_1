@@ -23,15 +23,13 @@ cursor.execute("CREATE INDEX IF NOT EXISTS idx_email ON Users (email)")
 #     if i % 2 != 0:
 #         cursor.execute("UPDATE Users SET balance = ? WHERE id = ?", ("500", f"{i}"))
 
-# a = 1
-# for i in range(10):
-#     cursor.execute("DELETE FROM Users WHERE id = ?", (f"{a}",))
-#     a += 3
+# for i in range(1, 11, 3):
+#     cursor.execute("DELETE FROM Users WHERE id = ?", (f"{i}",))
 
-cursor.execute("SELECT username, email, age, balance FROM Users WHERE age != ?", ("60",))
+cursor.execute("SELECT username, email, age, balance FROM Users WHERE age != ?", (60,))
 users = cursor.fetchall()
 for user in users:
-    print(f'Имя: {user[1]} | Почта: {user[2]} | Возраст: {user[3]} | Баланс: {user[4]}')
+    print(f'Имя: {user[0]} | Почта: {user[1]} | Возраст: {user[2]} | Баланс: {user[3]}')
 
 connect.commit()
 connect.close()
